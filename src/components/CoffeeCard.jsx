@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee,coffees,setCoffees }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, quantity, supplier, taste, category, details, photo } =
     coffee;
 
@@ -18,20 +18,20 @@ const CoffeeCard = ({ coffee,coffees,setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffee/${_id}`,{
-            method:"DELETE"
+        fetch(`https://coffee-store-server-mu-nine.vercel.app/coffee/${_id}`, {
+          method: "DELETE",
         })
-          .then(res => res.json())
-          .then(data => {
+          .then((res) => res.json())
+          .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "Your coffee has been deleted.",
-                  icon: "success"
-                });
-                const remaining = coffees.filter(cof => cof._id !== _id)
-                setCoffees(remaining);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your coffee has been deleted.",
+                icon: "success",
+              });
+              const remaining = coffees.filter((cof) => cof._id !== _id);
+              setCoffees(remaining);
             }
           });
       }
@@ -51,7 +51,9 @@ const CoffeeCard = ({ coffee,coffees,setCoffees }) => {
         <div className="card-actions justify-end">
           <div className="join join-vertical space-y-4">
             <button className="btn join-item">View</button>
-            <Link to={`/updateCoffee/${_id}`}><button className="btn join-item">Edit</button></Link>
+            <Link to={`/updateCoffee/${_id}`}>
+              <button className="btn join-item">Edit</button>
+            </Link>
             <button onClick={() => handleDelete(_id)} className="btn join-item">
               Delete
             </button>

@@ -14,12 +14,12 @@ const SignUp = () => {
     signUp(email, password)
       .then((result) => {
         console.log(result.user);
-        const createdAt = result.user?.metadata?.creationTime;  
-        const user = { email , password ,createdAt };
-        fetch('http://localhost:5000/users', {
-          method: 'POST',
+        const createdAt = result.user?.metadata?.creationTime;
+        const user = { email, password, createdAt };
+        fetch("https://coffee-store-server-mu-nine.vercel.app/users", {
+          method: "POST",
           headers: {
-            'content-type': 'application/json',
+            "content-type": "application/json",
           },
           body: JSON.stringify(user),
         })
